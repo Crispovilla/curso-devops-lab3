@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cvillarroel
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: cvillarroel
+data:
+  USER_KEY: "mi-usuario-configmap"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+  namespace: cvillarroel
+type: Opaque
+stringData:
+  BD_PASSWORD: "PasswordSeguro123!"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: cvillarroel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mi-app
+  template:
+    metadata:
+      labels:
+        app: mi-app
+    spec:
+      containers:
+        - name: app-container
+          image: cvillarroel/curso-devops-lab3:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: USER_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: USER_KEY
+            - name: BD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: BD_PASSWORD
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: cvillarroel
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: mi-app
