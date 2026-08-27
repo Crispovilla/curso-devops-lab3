@@ -99,6 +99,9 @@ pipeline {
         }
 
         stage('h. Actualización Kubernetes Local') {
+            agent {
+                docker { image 'bitnami/kubectl:latest' }
+            }
             steps {
                 sh """
                   kubectl set image deployment/app-deployment app-container=${GITHUB_REPO}:${BUILD_NUMBER} -n ${K8S_NAMESPACE}
