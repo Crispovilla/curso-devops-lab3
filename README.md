@@ -100,4 +100,4 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 ## Repositorios Públicos del Proyecto
 - **Docker Hub**: https://hub.docker.com/r/cvillarroel/curso-devops-lab3
 - **GitHub Container Registry (GHCR)**: https://github.com/users/crispovilla/packages/container/package/curso-devops-lab3
-- **GitHub Reository**: https://github.com/Crispovilla/curso-devops-lab3
+- **GitHub Repository**: https://github.com/Crispovilla/curso-devops-lab3
