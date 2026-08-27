@@ -4,7 +4,7 @@ pipeline {
     environment {
         SEM_VER        = '1.0.0'
         DOCKERHUB_REPO = 'cvillarroel/curso-devops-lab3'
-        GITHUB_REPO    = 'ghcr.io/cvillarroel/curso-devops-lab3'
+        GITHUB_REPO    = 'ghcr.io/crispovilla/curso-devops-lab3'
         K8S_NAMESPACE  = 'cvillarroel'
     }
 
