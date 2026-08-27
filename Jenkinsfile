@@ -36,6 +36,7 @@ pipeline {
                 withSonarQubeEnv('SonarQubeServer') { 
                     sh '''
                       npx sonarqube-scanner \
+                        -Dsonar.host.url=http://host.docker.internal:8082 \
                         -Dsonar.projectKey=curso-devops-lab3 \
                         -Dsonar.sources=src \
                         -Dsonar.tests=src \
