@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('a. Instalación de dependencias') {
             agent {
-                docker { image 'node:18' }
+                docker { image 'node:20' }
             }
             steps {
                 sh 'npm ci'
@@ -20,7 +20,7 @@ pipeline {
 
         stage('b. Ejecución de pruebas') {
             agent {
-                docker { image 'node:18' }
+                docker { image 'node:20' }
             }
             steps {
                 sh 'npm test'
@@ -29,7 +29,7 @@ pipeline {
 
         stage('c. Cobertura SonarQube & Quality Gate') {
             agent {
-                docker { image 'node:18' }
+                docker { image 'node:20' }
             }
             steps {
                 sh 'npm run test:cov'
@@ -52,7 +52,7 @@ pipeline {
 
         stage('d. Build de la aplicación') {
             agent {
-                docker { image 'node:18' }
+                docker { image 'node:20' }
             }
             steps {
                 sh 'npm run build'
