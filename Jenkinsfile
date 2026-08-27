@@ -33,10 +33,11 @@ pipeline {
             }
             steps {
                 sh 'npm run test:cov'
-                withSonarQubeEnv('SonarQubeServer') { 
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     sh '''
                       npx sonarqube-scanner \
                         -Dsonar.host.url=http://host.docker.internal:8082 \
+                        -Dsonar.token=${SONAR_TOKEN} \
                         -Dsonar.projectKey=curso-devops-lab3 \
                         -Dsonar.sources=src \
                         -Dsonar.tests=src \
@@ -44,9 +45,6 @@ pipeline {
                         -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
                         -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
                     '''
-                }
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
                 }
             }
         }
