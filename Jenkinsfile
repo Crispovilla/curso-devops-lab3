@@ -10,23 +10,32 @@ pipeline {
 
     stages {
         stage('a. Instalación de dependencias') {
+            agent {
+                docker { image 'node:18' }
+            }
             steps {
                 sh 'npm ci'
             }
         }
 
         stage('b. Ejecución de pruebas') {
+            agent {
+                docker { image 'node:18' }
+            }
             steps {
                 sh 'npm test'
             }
         }
 
         stage('c. Cobertura SonarQube & Quality Gate') {
+            agent {
+                docker { image 'node:18' }
+            }
             steps {
                 sh 'npm run test:cov'
                 withSonarQubeEnv('SonarQubeServer') { 
                     sh '''
-                      sonar-scanner \
+                      npx sonarqube-scanner \
                         -Dsonar.projectKey=curso-devops-lab3 \
                         -Dsonar.sources=src \
                         -Dsonar.tests=src \
@@ -42,6 +51,9 @@ pipeline {
         }
 
         stage('d. Build de la aplicación') {
+            agent {
+                docker { image 'node:18' }
+            }
             steps {
                 sh 'npm run build'
             }
