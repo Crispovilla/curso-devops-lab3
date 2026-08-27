@@ -100,12 +100,15 @@ pipeline {
 
         stage('h. Actualización Kubernetes Local') {
             agent {
-                docker { image 'bitnami/kubectl:latest' }
+                docker { 
+                    image 'bitnami/kubectl:latest'
+                    args '-v /root/.kube:/opt/bitnami/kubectl/.kube:ro --network host'
+                }
             }
             steps {
                 sh """
                   kubectl set image deployment/app-deployment app-container=${GITHUB_REPO}:${BUILD_NUMBER} -n ${K8S_NAMESPACE}
-                  kubectl rollout status deployment/app-deployment -n ${K8S_NAMESPACE}
+                  kubectl rollout status deployment/app-deployment -n ${K8S_NAMESPACE} --timeout=60s
                 """
             }
         }
