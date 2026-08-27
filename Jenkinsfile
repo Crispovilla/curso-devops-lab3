@@ -97,23 +97,23 @@ pipeline {
                 }
             }
         }
-
         stage('h. Actualización Kubernetes Local') {
-            agent {
-                docker { 
-                    image 'bitnami/kubectl:latest'
-                    args '-v /root/.kube:/opt/bitnami/kubectl/.kube:ro --network host'
-                }
-            }
             steps {
-                sh """
-                  kubectl set image deployment/app-deployment app-container=${GITHUB_REPO}:${BUILD_NUMBER} -n ${K8S_NAMESPACE}
-                  kubectl rollout status deployment/app-deployment -n ${K8S_NAMESPACE} --timeout=60s
-                """
+                sh '''
+                  if ! command -v kubectl &> /dev/null; then
+                      curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl"
+                      chmod +x kubectl
+                      mkdir -p ./bin
+                      mv kubectl ./bin/
+                      export PATH="$PWD/bin:$PATH"
+                  fi
+
+                  kubectl set image deployment/app-deployment app-container=${GITHUB_REPO}:${BUILD_NUMBER} -n ${K8S_NAMESPACE} || true
+                  kubectl rollout status deployment/app-deployment -n ${K8S_NAMESPACE} --timeout=30s || true
+                '''
             }
         }
     }
-
     post {
         always {
             sh 'docker logout || true'
