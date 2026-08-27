@@ -1,0 +1,1165 @@
+Started by user unknown or anonymous
+Obtained Jenkinsfile from git https://github.com/Crispovilla/curso-devops-lab3
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/curso-devops-lab3
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/curso-devops-lab3/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Crispovilla/curso-devops-lab3 # timeout=10
+Fetching upstream changes from https://github.com/Crispovilla/curso-devops-lab3
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Crispovilla/curso-devops-lab3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/cvillarroel^{commit} # timeout=10
+Checking out Revision 3348da132a2cf44d959dbe4c5d055e01ede2de84 (refs/remotes/origin/cvillarroel)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3348da132a2cf44d959dbe4c5d055e01ede2de84 # timeout=10
+Commit message: "Fix: remover agente docker en stage h para usar red host"
+ > git rev-list --no-walk 8b938b3a9a19073ca45f132b4d89080076ca23e7 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (a. Instalación de dependencias)
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/curso-devops-lab3@2
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/curso-devops-lab3@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Crispovilla/curso-devops-lab3 # timeout=10
+Fetching upstream changes from https://github.com/Crispovilla/curso-devops-lab3
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Crispovilla/curso-devops-lab3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/cvillarroel^{commit} # timeout=10
+Checking out Revision 3348da132a2cf44d959dbe4c5d055e01ede2de84 (refs/remotes/origin/cvillarroel)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3348da132a2cf44d959dbe4c5d055e01ede2de84 # timeout=10
+Commit message: "Fix: remover agente docker en stage h para usar red host"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:20
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6
+$ docker run -t -d -u 0:0 -w /var/jenkins_home/workspace/curso-devops-lab3@2 --volumes-from ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:20 cat
+$ docker top 1f19ef739bc0a437ada348448ddf2910c0678ba46bd5f544ad91f5f35e2d8ca0 -eo pid,comm
+[Pipeline] {
+[Pipeline] sh
++ npm ci
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+
+added 688 packages, and audited 689 packages in 25s
+
+144 packages are looking for funding
+  run `npm fund` for details
+
+9 vulnerabilities (2 low, 1 moderate, 6 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[Pipeline] }
+$ docker stop --time=1 1f19ef739bc0a437ada348448ddf2910c0678ba46bd5f544ad91f5f35e2d8ca0
+$ docker rm -f --volumes 1f19ef739bc0a437ada348448ddf2910c0678ba46bd5f544ad91f5f35e2d8ca0
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (b. Ejecución de pruebas)
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/curso-devops-lab3@2
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/curso-devops-lab3@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Crispovilla/curso-devops-lab3 # timeout=10
+Fetching upstream changes from https://github.com/Crispovilla/curso-devops-lab3
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Crispovilla/curso-devops-lab3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/cvillarroel^{commit} # timeout=10
+Checking out Revision 3348da132a2cf44d959dbe4c5d055e01ede2de84 (refs/remotes/origin/cvillarroel)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3348da132a2cf44d959dbe4c5d055e01ede2de84 # timeout=10
+Commit message: "Fix: remover agente docker en stage h para usar red host"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:20
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6
+$ docker run -t -d -u 0:0 -w /var/jenkins_home/workspace/curso-devops-lab3@2 --volumes-from ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:20 cat
+$ docker top 4c199a2f4a03dfd9656b65a6d0f5bccb8e55705436b3d896be122ad83b8d8195 -eo pid,comm
+[Pipeline] {
+[Pipeline] sh
++ npm test
+
+> curso-devops-lab3@0.0.1 test
+> jest
+
+PASS src/app.controller.spec.ts
+  AppController
+    root
+      ✓ should return "Hello World!" (12 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.686 s
+Ran all test suites.
+[Pipeline] }
+$ docker stop --time=1 4c199a2f4a03dfd9656b65a6d0f5bccb8e55705436b3d896be122ad83b8d8195
+$ docker rm -f --volumes 4c199a2f4a03dfd9656b65a6d0f5bccb8e55705436b3d896be122ad83b8d8195
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (c. Cobertura SonarQube & Quality Gate)
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/curso-devops-lab3@2
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/curso-devops-lab3@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Crispovilla/curso-devops-lab3 # timeout=10
+Fetching upstream changes from https://github.com/Crispovilla/curso-devops-lab3
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Crispovilla/curso-devops-lab3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/cvillarroel^{commit} # timeout=10
+Checking out Revision 3348da132a2cf44d959dbe4c5d055e01ede2de84 (refs/remotes/origin/cvillarroel)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3348da132a2cf44d959dbe4c5d055e01ede2de84 # timeout=10
+Commit message: "Fix: remover agente docker en stage h para usar red host"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:20
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6
+$ docker run -t -d -u 0:0 -w /var/jenkins_home/workspace/curso-devops-lab3@2 --volumes-from ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:20 cat
+$ docker top ecc86059e3f047ba5732f54d9885db7064ae4ab3536ee932f32ac20eaddf2717 -eo pid,comm
+[Pipeline] {
+[Pipeline] sh
++ npm run test:cov
+
+> curso-devops-lab3@0.0.1 test:cov
+> jest --coverage
+
+PASS src/app.controller.spec.ts
+  AppController
+    root
+      ✓ should return "Hello World!" (12 ms)
+
+-----------------------|---------|----------|---------|---------|-------------------
+File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-----------------------|---------|----------|---------|---------|-------------------
+All files              |   14.94 |    16.66 |   16.66 |   13.84 |                   
+ src                   |      50 |       50 |      75 |      45 |                   
+  app.controller.ts    |     100 |       75 |     100 |     100 | 6                 
+  app.module.ts        |       0 |      100 |     100 |       0 | 1-12              
+  app.service.ts       |     100 |      100 |     100 |     100 |                   
+  main.ts              |       0 |        0 |       0 |       0 | 1-8               
+ src/health            |       0 |        0 |       0 |       0 |                   
+  health.controller.ts |       0 |        0 |       0 |       0 | 1-10              
+  health.module.ts     |       0 |      100 |     100 |       0 | 1-9               
+  health.service.ts    |       0 |      100 |       0 |       0 | 1-8               
+ src/items             |       0 |        0 |       0 |       0 |                   
+  items.controller.ts  |       0 |        0 |       0 |       0 | 1-34              
+  items.module.ts      |       0 |      100 |     100 |       0 | 1-9               
+  items.service.ts     |       0 |        0 |       0 |       0 | 1-36              
+-----------------------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        4.193 s
+Ran all test suites.
+[Pipeline] withCredentials
+Masking supported pattern matches of $SONAR_TOKEN
+[Pipeline] {
+[Pipeline] sh
++ npx sonarqube-scanner -Dsonar.host.url=http://host.docker.internal:8082 -Dsonar.token=**** -Dsonar.projectKey=curso-devops-lab3 -Dsonar.sources=src -Dsonar.tests=src -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+npm warn exec The following package was not found and will be installed: sonarqube-scanner@4.4.0
+[INFO]  Bootstrapper: Retrieving info from "package.json" file
+[INFO]  Bootstrapper: Platform: linux x64
+[INFO]  Bootstrapper: Server URL: http://host.docker.internal:8082
+[INFO]  Bootstrapper: Version: 4.4.0
+[INFO]  Bootstrapper: SonarQube server version: 26.8.0
+[INFO]  Bootstrapper: JRE provisioning is supported
+[INFO]  Bootstrapper: No Cache found for JRE
+[INFO]  Bootstrapper: Download starting...
+[INFO]  Bootstrapper: Download complete
+[INFO]  Bootstrapper: Downloaded JRE to /root/.sonar/cache/e5038aae3ca9ff670bc696496b0728dbd23d280026bad30291cb919221ecfdcb/OpenJDK21U-jre_x64_linux_hotspot_21.0.11_10.tar.gz
+[INFO]  Bootstrapper: No Cache found for SonarScanner Engine
+[INFO]  Bootstrapper: Download starting...
+[INFO]  Bootstrapper: Download complete
+[INFO]  Bootstrapper: Downloaded SonarScanner Engine to /root/.sonar/cache/826dd133d6bf6e9c71c1bf81aed2dcf7743862912a8ac7af2c4e9a60fda16107/sonar-scanner-engine-community-13.4.1.4007.jar
+[INFO]  ScannerEngine: Starting SonarScanner Engine...
+[INFO]  ScannerEngine: Java 21.0.11 Eclipse Adoptium (64-bit)
+[INFO]  ScannerEngine: Load global settings
+[INFO]  ScannerEngine: Load global settings (done) | time=398ms
+[INFO]  ScannerEngine: Server id: D1BE41C1-AZ_w4ndtLvmDNACbu8cK
+[INFO]  ScannerEngine: Loading required plugins
+[INFO]  ScannerEngine: Load plugins index
+[INFO]  ScannerEngine: Load plugins index (done) | time=129ms
+[INFO]  ScannerEngine: Load/download plugins
+[INFO]  ScannerEngine: Load/download plugins (done) | time=2387ms
+[INFO]  ScannerEngine: Process project properties
+[INFO]  ScannerEngine: Process project properties (done) | time=14ms
+[INFO]  ScannerEngine: Project key: curso-devops-lab3
+[INFO]  ScannerEngine: Base dir: /var/jenkins_home/workspace/curso-devops-lab3@2
+[INFO]  ScannerEngine: Working dir: /var/jenkins_home/workspace/curso-devops-lab3@2/.scannerwork
+[INFO]  ScannerEngine: Load project settings for component key: 'curso-devops-lab3'
+[INFO]  ScannerEngine: Load project settings for component key: 'curso-devops-lab3' (done) | time=79ms
+[INFO]  ScannerEngine: Load quality profiles
+[INFO]  ScannerEngine: Load quality profiles (done) | time=390ms
+[INFO]  ScannerEngine: Auto-configuring with CI 'Jenkins'
+[INFO]  ScannerEngine: Load active rules
+[INFO]  ScannerEngine: Load active rules (done) | time=1431ms
+[INFO]  ScannerEngine: Load analysis cache
+[INFO]  ScannerEngine: Load analysis cache (4.7 kB) | time=62ms
+[INFO]  ScannerEngine: Preprocessing files...
+[INFO]  ScannerEngine: 1 language detected in 11 preprocessed files (done) | time=90ms
+[INFO]  ScannerEngine: 11 files ignored because of inclusion/exclusion patterns
+[INFO]  ScannerEngine: 0 files ignored because of scm ignore settings
+[INFO]  ScannerEngine: Loading plugins for detected languages
+[INFO]  ScannerEngine: Load/download plugins
+[INFO]  ScannerEngine: Load/download plugins (done) | time=6090ms
+[INFO]  ScannerEngine: Load project repositories
+[INFO]  ScannerEngine: Load project repositories (done) | time=158ms
+[INFO]  ScannerEngine: Indexing files...
+[INFO]  ScannerEngine: Project configuration:
+[INFO]  ScannerEngine:   Excluded sources: node_modules/**, bower_components/**, jspm_packages/**, typings/**, lib-cov/**, coverage/**, **/*.spec.ts
+[INFO]  ScannerEngine:   Included tests: **/*.spec.ts
+[INFO]  ScannerEngine: 11 files indexed (done) | time=13ms
+[INFO]  ScannerEngine: Quality profile for ts: Sonar way
+[INFO]  ScannerEngine: ------------- Run sensors on module curso-devops-lab3
+[INFO]  ScannerEngine: Load metrics repository
+[INFO]  ScannerEngine: Load metrics repository (done) | time=68ms
+[INFO]  ScannerEngine: Sensor IaC hadolint report Sensor [iac]
+[INFO]  ScannerEngine: Sensor IaC hadolint report Sensor [iac] (done) | time=0ms
+[INFO]  ScannerEngine: Sensor Java Config Sensor [iac]
+[INFO]  ScannerEngine: There are no files to be analyzed for the Java language
+[INFO]  ScannerEngine: Sensor Java Config Sensor [iac] (done) | time=17ms
+[INFO]  ScannerEngine: Sensor IaC Docker Sensor [iac]
+[INFO]  ScannerEngine: There are no files to be analyzed for the Docker language
+[INFO]  ScannerEngine: Sensor IaC Docker Sensor [iac] (done) | time=2ms
+[INFO]  ScannerEngine: Sensor JavaScript/TypeScript Coverage [javascript]
+[INFO]  ScannerEngine: Merging coverage reports from sonar.javascript.lcov.reportPaths and sonar.typescript.lcov.reportPaths.
+[INFO]  ScannerEngine: Analysing [/var/jenkins_home/workspace/curso-devops-lab3@2/coverage/lcov.info]
+[INFO]  ScannerEngine: Sensor JavaScript/TypeScript Coverage [javascript] (done) | time=27ms
+[INFO]  ScannerEngine: Sensor TextAndSecretsSensor [text]
+[INFO]  ScannerEngine: Available processors: 16
+[INFO]  ScannerEngine: Using 16 threads for analysis.
+[INFO]  ScannerEngine: Start fetching files for the text and secrets analysis
+[INFO]  ScannerEngine: Using Git CLI to retrieve dirty files
+[INFO]  ScannerEngine: Retrieving language associated files and files included via "sonar.text.inclusions" that are tracked by git
+[INFO]  ScannerEngine: Starting the text and secrets analysis
+[INFO]  ScannerEngine: 11 source files to be analyzed for the text and secrets analysis
+[INFO]  ScannerEngine: 11/11 source files have been analyzed for the text and secrets analysis
+[INFO]  ScannerEngine: Sensor TextAndSecretsSensor [text] (done) | time=386ms
+[INFO]  ScannerEngine: ------------- Run sensors on project
+[INFO]  ScannerEngine: Sensor JavaScript/TypeScript/CSS analysis [javascript]
+[INFO]  ScannerEngine: Detected os: Linux arch: amd64 alpine: false. Platform: LINUX_X64
+[INFO]  ScannerEngine: Deploy location /root/.sonar/js/node-runtime, tagetRuntime: /root/.sonar/js/node-runtime/node,  version: /root/.sonar/js/node-runtime/version.txt
+[INFO]  ScannerEngine: Using embedded Node.js runtime.
+[INFO]  ScannerEngine: Using Node.js executable: '/root/.sonar/js/node-runtime/node'.
+[INFO]  ScannerEngine: Memory configuration: OS (7626 MB), Node.js (2240 MB).
+[INFO]  ScannerEngine: gRPC analyze-project server listening on 127.0.0.1:42539
+[INFO]  ScannerEngine: Plugin version: [13.4.0.43982]
+[INFO]  ScannerEngine: Found 1 tsconfig.json file(s): [/var/jenkins_home/workspace/curso-devops-lab3@2/tsconfig.json]
+[INFO]  ScannerEngine: 11 source files to be analyzed
+[INFO]  ScannerEngine: Creating TypeScript(6.0.3) program with configuration file /var/jenkins_home/workspace/curso-devops-lab3@2/tsconfig.json [lib: lib.es2024.d.ts, lib.dom.d.ts]
+[INFO]  ScannerEngine: Analyzing 11 file(s) from tsconfig /var/jenkins_home/workspace/curso-devops-lab3@2/tsconfig.json (662 total files in program)
+[INFO]  ScannerEngine: 11/11 source files have been analyzed
+[INFO]  ScannerEngine: Hit the cache for 0 out of 11
+[INFO]  ScannerEngine: Miss the cache for 11 out of 11: ANALYSIS_MODE_INELIGIBLE [11/11]
+[INFO]  ScannerEngine: Sensor JavaScript/TypeScript/CSS analysis [javascript] (done) | time=23389ms
+[INFO]  ScannerEngine: Sensor IaC Project Sensor [iac]
+[INFO]  ScannerEngine: Sensor IaC Project Sensor [iac] (done) | time=1ms
+[INFO]  ScannerEngine: Sensor Zero Coverage Sensor
+[INFO]  ScannerEngine: Sensor Zero Coverage Sensor (done) | time=0ms
+[INFO]  ScannerEngine: ------------- Gather SCA dependencies on project
+[INFO]  ScannerEngine: Dependency analysis skipped
+[INFO]  ScannerEngine: CPD Executor 7 files had no CPD blocks
+[INFO]  ScannerEngine: CPD Executor Calculating CPD for 3 files
+[INFO]  ScannerEngine: CPD Executor CPD calculation finished (done) | time=10ms
+[INFO]  ScannerEngine: SCM revision ID '3348da132a2cf44d959dbe4c5d055e01ede2de84'
+[INFO]  ScannerEngine: Analysis report generated in 98ms, dir size=306.3 kB
+[INFO]  ScannerEngine: Analysis report compressed in 43ms, zip size=51.7 kB
+[INFO]  ScannerEngine: Analysis report uploaded in 149ms
+[INFO]  ScannerEngine: ANALYSIS SUCCESSFUL, you can find the results at: http://host.docker.internal:8082/dashboard?id=curso-devops-lab3
+[INFO]  ScannerEngine: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO]  ScannerEngine: More about the report processing at http://host.docker.internal:8082/api/ce/task?id=9ed01226-8112-4e91-a747-ef6f10766911
+[INFO]  ScannerEngine: Analysis total time: 34.673 s
+[INFO]  ScannerEngine: SonarScanner Engine completed successfully
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+$ docker stop --time=1 ecc86059e3f047ba5732f54d9885db7064ae4ab3536ee932f32ac20eaddf2717
+$ docker rm -f --volumes ecc86059e3f047ba5732f54d9885db7064ae4ab3536ee932f32ac20eaddf2717
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (d. Build de la aplicación)
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/curso-devops-lab3@2
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/curso-devops-lab3@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Crispovilla/curso-devops-lab3 # timeout=10
+Fetching upstream changes from https://github.com/Crispovilla/curso-devops-lab3
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Crispovilla/curso-devops-lab3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/cvillarroel^{commit} # timeout=10
+Checking out Revision 3348da132a2cf44d959dbe4c5d055e01ede2de84 (refs/remotes/origin/cvillarroel)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 3348da132a2cf44d959dbe4c5d055e01ede2de84 # timeout=10
+Commit message: "Fix: remover agente docker en stage h para usar red host"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:20
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6
+$ docker run -t -d -u 0:0 -w /var/jenkins_home/workspace/curso-devops-lab3@2 --volumes-from ac6c988f41f90046aa21a06f45d56291500fe528e45f1ca04edc1ef971d3e3c6 -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:20 cat
+$ docker top 5a889b962ec2c8c6ef3b5bc5a11e8b30550fc35c3e43a940706d24c4b68bf8a3 -eo pid,comm
+[Pipeline] {
+[Pipeline] sh
++ npm run build
+
+> curso-devops-lab3@0.0.1 build
+> nest build
+
+[Pipeline] }
+$ docker stop --time=1 5a889b962ec2c8c6ef3b5bc5a11e8b30550fc35c3e43a940706d24c4b68bf8a3
+$ docker rm -f --volumes 5a889b962ec2c8c6ef3b5bc5a11e8b30550fc35c3e43a940706d24c4b68bf8a3
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (e. Construcción imagen Docker multistage)
+[Pipeline] sh
++ docker build -t cvillarroel/curso-devops-lab3:9 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 375B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/node:18-alpine
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [builder 1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#4 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 21.97kB 0.0s done
+#5 DONE 0.1s
+
+#6 [builder 2/6] WORKDIR /app
+#6 CACHED
+
+#7 [builder 3/6] COPY package*.json ./
+#7 CACHED
+
+#8 [builder 4/6] RUN npm ci
+#8 CACHED
+
+#9 [builder 5/6] COPY . .
+#9 DONE 0.2s
+
+#10 [builder 6/6] RUN npm run build
+#10 1.651 
+#10 1.651 > curso-devops-lab3@0.0.1 build
+#10 1.651 > nest build
+#10 1.651 
+#10 DONE 8.0s
+
+#11 [runner 4/5] RUN npm ci --only=production
+#11 CACHED
+
+#12 [runner 5/5] COPY --from=builder /app/dist ./dist
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:c8eae05467c161692427623864a120377afd34cb21a738c170cfd957e246c733 done
+#13 exporting config sha256:0c6201cc162ec47426a65627aca382e8772f6c534e414b3a501494847d296f45 done
+#13 exporting attestation manifest sha256:6e9b8145430811eebdd18825b4880a8747a27208b0dfdfa56fc450ca2e7dad15 0.0s done
+#13 exporting manifest list sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71
+#13 exporting manifest list sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 0.0s done
+#13 naming to docker.io/cvillarroel/curso-devops-lab3:9 done
+#13 unpacking to docker.io/cvillarroel/curso-devops-lab3:9 0.0s done
+#13 DONE 0.2s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (f. Upload a Docker Hub)
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [PASS]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo ****
++ docker login -u cvillarroel --password-stdin
+
+WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
++ docker tag cvillarroel/curso-devops-lab3:9 cvillarroel/curso-devops-lab3:1.0.0
++ docker tag cvillarroel/curso-devops-lab3:9 cvillarroel/curso-devops-lab3:latest
++ docker push cvillarroel/curso-devops-lab3:9
+The push refers to repository [docker.io/cvillarroel/curso-devops-lab3]
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Layer already exists
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Layer already exists
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Layer already exists
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+25ff2da83641: Layer already exists
+4f44d6fcb41b: Layer already exists
+98609fce4995: Layer already exists
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Layer already exists
+1e5a4c89cee5: Layer already exists
+f89cc68db8ca: Pushed
+9: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
++ docker push cvillarroel/curso-devops-lab3:1.0.0
+The push refers to repository [docker.io/cvillarroel/curso-devops-lab3]
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+0c4b3893882d: Layer already exists
+b64bfd4f39e4: Layer already exists
+4f44d6fcb41b: Layer already exists
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+dd71dde834b5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f89cc68db8ca: Already exists
+1e5a4c89cee5: Layer already exists
+25ff2da83641: Layer already exists
+f18232174bc9: Layer already exists
+dd71dde834b5: Layer already exists
+98609fce4995: Layer already exists
+1.0.0: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
++ docker push cvillarroel/curso-devops-lab3:latest
+The push refers to repository [docker.io/cvillarroel/curso-devops-lab3]
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+b64bfd4f39e4: Layer already exists
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+98609fce4995: Layer already exists
+f89cc68db8ca: Already exists
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+f18232174bc9: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+dd71dde834b5: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Layer already exists
+0c4b3893882d: Layer already exists
+1e5a4c89cee5: Layer already exists
+dd71dde834b5: Layer already exists
+4f44d6fcb41b: Layer already exists
+f18232174bc9: Layer already exists
+latest: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (g. Upload a GitHub Packages)
+[Pipeline] withCredentials
+Masking supported pattern matches of $PASS
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [PASS]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo ****
++ docker login ghcr.io -u Crispovilla --password-stdin
+
+WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
++ docker tag cvillarroel/curso-devops-lab3:9 ghcr.io/crispovilla/curso-devops-lab3:9
++ docker tag cvillarroel/curso-devops-lab3:9 ghcr.io/crispovilla/curso-devops-lab3:1.0.0
++ docker tag cvillarroel/curso-devops-lab3:9 ghcr.io/crispovilla/curso-devops-lab3:latest
++ docker push ghcr.io/crispovilla/curso-devops-lab3:9
+The push refers to repository [ghcr.io/crispovilla/curso-devops-lab3]
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+b64bfd4f39e4: Waiting
+dd71dde834b5: Waiting
+1e5a4c89cee5: Waiting
+98609fce4995: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+f18232174bc9: Layer already exists
+0c4b3893882d: Layer already exists
+4f44d6fcb41b: Layer already exists
+25ff2da83641: Layer already exists
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Layer already exists
+dd71dde834b5: Layer already exists
+1e5a4c89cee5: Layer already exists
+98609fce4995: Layer already exists
+f89cc68db8ca: Pushed
+9: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
++ docker push ghcr.io/crispovilla/curso-devops-lab3:1.0.0
+The push refers to repository [ghcr.io/crispovilla/curso-devops-lab3]
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+f89cc68db8ca: Already exists
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Layer already exists
+dd71dde834b5: Waiting
+0c4b3893882d: Waiting
+1e5a4c89cee5: Waiting
+25ff2da83641: Waiting
+f18232174bc9: Waiting
+b64bfd4f39e4: Layer already exists
+dd71dde834b5: Layer already exists
+0c4b3893882d: Layer already exists
+1e5a4c89cee5: Layer already exists
+25ff2da83641: Layer already exists
+f18232174bc9: Layer already exists
+98609fce4995: Layer already exists
+1.0.0: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
++ docker push ghcr.io/crispovilla/curso-devops-lab3:latest
+The push refers to repository [ghcr.io/crispovilla/curso-devops-lab3]
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+f89cc68db8ca: Waiting
+1e5a4c89cee5: Waiting
+f18232174bc9: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+4f44d6fcb41b: Waiting
+0c4b3893882d: Waiting
+98609fce4995: Waiting
+25ff2da83641: Waiting
+dd71dde834b5: Waiting
+b64bfd4f39e4: Waiting
+f89cc68db8ca: Already exists
+1e5a4c89cee5: Layer already exists
+f18232174bc9: Waiting
+4f44d6fcb41b: Layer already exists
+0c4b3893882d: Layer already exists
+98609fce4995: Layer already exists
+25ff2da83641: Layer already exists
+dd71dde834b5: Layer already exists
+b64bfd4f39e4: Layer already exists
+f18232174bc9: Layer already exists
+latest: digest: sha256:3c38b28ddf91b3fa0ec0d10cac32c55f36df90ddbf6296e96cb60c751902ae71 size: 856
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (h. Actualización Kubernetes Local)
+[Pipeline] sh
++ 
++ curl -LO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
++ command -v kubectl
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  8 47.5M    8 4096k    0     0  1047k      0  0:00:46  0:00:03  0:00:43 1047k  8 47.5M    8 4096k    0     0   860k      0  0:00:56  0:00:04  0:00:52  860k 11 47.5M   11 5453k    0     0  1090k      0  0:00:44  0:00:05  0:00:39 1090k 16 47.5M   16 8192k    0     0  1277k      0  0:00:38  0:00:06  0:00:32 1544k 16 47.5M   16 8192k    0     0  1104k      0  0:00:44  0:00:07  0:00:37 1544k 25 47.5M   25 12.0M    0     0  1368k      0  0:00:35  0:00:08  0:00:27 1617k 25 47.5M   25 12.0M    0     0  1341k      0  0:00:36  0:00:09  0:00:27 1861k 33 47.5M   33 16.0M    0     0  1496k      0  0:00:32  0:00:10  0:00:22 1837k 33 47.5M   33 16.0M    0     0  1378k      0  0:00:35  0:00:11  0:00:24 1496k 35 47.5M   35 16.6M    0     0  1422k      0  0:00:34  0:00:12  0:00:22 1935k 42 47.5M   42 20.0M    0     0  1504k      0  0:00:32  0:00:13  0:00:19 1766k 42 47.5M   42 20.0M    0     0  1411k      0  0:00:34  0:00:14  0:00:20 1533k 48 47.5M   48 23.2M    0     0  1589k      0  0:00:30  0:00:15  0:00:15 1842k 50 47.5M   50 24.0M    0     0  1519k      0  0:00:32  0:00:16  0:00:16 1911k 50 47.5M   50 24.0M    0     0  1439k      0  0:00:33  0:00:17  0:00:16 1481k 58 47.5M   58 28.0M    0     0  1511k      0  0:00:32  0:00:18  0:00:14 1529k 58 47.5M   58 28.0M    0     0  1437k      0  0:00:33  0:00:19  0:00:14 1506k 59 47.5M   59 28.4M    0     0  1454k      0  0:00:33  0:00:20  0:00:13 1049k 67 47.5M   67 32.0M    0     0  1524k      0  0:00:31  0:00:21  0:00:10 1537k 67 47.5M   67 32.0M    0     0  1457k      0  0:00:33  0:00:22  0:00:11 1513k 73 47.5M   73 35.1M    0     0  1565k      0  0:00:31  0:00:23  0:00:08 1821k 75 47.5M   75 36.0M    0     0  1528k      0  0:00:31  0:00:24  0:00:07 1964k 84 47.5M   84 40.0M    0     0  1578k      0  0:00:30  0:00:25  0:00:05 1994k 84 47.5M   84 40.0M    0     0  1519k      0  0:00:32  0:00:26  0:00:06 1502k 84 47.5M   84 40.0M    0     0  1515k      0  0:00:32  0:00:27  0:00:05 1805k 92 47.5M   92 44.0M    0     0  1571k      0  0:00:30  0:00:28  0:00:02 1595k 94 47.5M   94 44.9M    0     0  1588k      0  0:00:30  0:00:29  0:00:01 1882k100 47.5M  100 47.5M    0     0  1656k      0  0:00:29  0:00:29 --:--:-- 2240k
++ chmod +x kubectl
++ mkdir -p ./bin
++ mv kubectl ./bin/
++ export PATH=/var/jenkins_home/workspace/curso-devops-lab3/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ kubectl set image deployment/app-deployment app-container=ghcr.io/crispovilla/curso-devops-lab3:9 -n cvillarroel
+E0827 14:37:57.124449    9347 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.155772    9347 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.187709    9347 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.204554    9347 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+error: invalid character '<' looking for beginning of value
++ true
++ kubectl rollout status deployment/app-deployment -n cvillarroel --timeout=30s
+E0827 14:37:57.377040    9363 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.406634    9363 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.440918    9363 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+E0827 14:37:57.483216    9363 memcache.go:265] couldn't get current server API group list: invalid character '<' looking for beginning of value
+error: invalid character '<' looking for beginning of value
++ true
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] sh
++ docker logout
+Removing login credentials for https://index.docker.io/v1/
+[Pipeline] sh
++ docker logout ghcr.io
+Removing login credentials for ghcr.io
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
