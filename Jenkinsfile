@@ -99,7 +99,7 @@ pipeline {
         }
         stage('h. Actualización Kubernetes Local') {
             steps {
-                sh '''
+                sh """
                   if ! command -v kubectl &> /dev/null; then
                       curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl"
                       chmod +x kubectl
@@ -110,7 +110,7 @@ pipeline {
 
                   kubectl set image deployment/app-deployment app-container=${GITHUB_REPO}:${BUILD_NUMBER} -n ${K8S_NAMESPACE} || true
                   kubectl rollout status deployment/app-deployment -n ${K8S_NAMESPACE} --timeout=30s || true
-                '''
+                """
             }
         }
     }

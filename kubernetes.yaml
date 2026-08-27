@@ -41,7 +41,6 @@ spec:
       containers:
         - name: app-container
           image: ghcr.io/crispovilla/curso-devops-lab3:latest
-          imagePullPolicy: Never
           ports:
             - containerPort: 3000
           env:
